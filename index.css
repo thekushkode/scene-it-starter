@@ -4,6 +4,11 @@ body {
 
 .header h2 {
 	color: #DC4247;
+	font-family: 'Anton';
+	font-weight: 700;
+	border: 4px dotted #DC4247;
+	border-radius: 25px;
+	margin: 10px 275px 10px 275px;
 }
 
 .header p {
