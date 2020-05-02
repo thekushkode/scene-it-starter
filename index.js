@@ -18,18 +18,19 @@ const renderMovies = function (movieArray) {
 };
 
 function saveToWatchlist(imdbID) {
-    console.log(imdbID);
-    const movie = movieData.find((currentMovie) => {
-        return currentMovie.imdbID == imdbID;
-    });
-    let watchlistJSON = localStorage.getItem("watchlist");
-    let watchlist = JSON.parse(watchlistJSON);
-    if (watchlist === null) {
-        watchlist = [];
-    }
-        watchlist.push(movie);
-        watchlistJSON = JSON.stringify(watchlist);
-        localStorage.setItem("watchlist", watchlistJSON);
+    axios.get(`http://www.omdbapi.com/?apikey=b43843a0&i=${imdbID}`)
+        .then(response => {
+            console.log(response.data.imdbID);
+            let movie = response.data;
+            let watchlistJSON = localStorage.getItem("watchlist");
+            let watchlist = JSON.parse(watchlistJSON);
+            if (watchlist === null) {
+                watchlist = [];
+            };
+            watchlist.push(movie);
+            watchlistJSON = JSON.stringify(watchlist);
+            localStorage.setItem("watchlist", watchlistJSON);
+        })
 };
 
 window.addEventListener("DOMContentLoaded", function () {
@@ -37,12 +38,8 @@ window.addEventListener("DOMContentLoaded", function () {
         e.preventDefault();
         const $searchString = $(".search-bar").val();
         let urlEncodedSearchString = encodeURIComponent($searchString)
-        console.log("*******");
-        console.log(urlEncodedSearchString);
-        console.log("*******");
         axios.get("http://www.omdbapi.com/?apikey=b43843a0&s=" + urlEncodedSearchString)
             .then(function (response) {
-                console.log(response.data);
                 moviesContainer.innerHTML = renderMovies(response.data.Search);
             })
     })
@@ -52,23 +49,3 @@ window.addEventListener("DOMContentLoaded", function () {
 
 
 
-
-
-
-
-
-// function cardImgAdded(movieArray) {
-//     for (let i = 0; i < movieArray.length; i++) {
-//         let imgSrc = movieArray[i]["Poster"];
-//         let imgTarget = document.getElementsByTagName("img")[i];
-//         imgTarget.setAttribute("src", imgSrc);
-//         let titleSrc = movieArray[i]["Title"];
-//         let titleTarget = document.getElementsByTagName("h5")[i];
-//         titleTarget.textContent = titleSrc;
-//         let yearSrc = movieArray[i]["Year"];
-//         let yearTarget = document.getElementsByTagName("p")[i + 2]
-//         yearTarget.innerText = `Year Realeased: ${yearSrc}`;
-//     }
-
-// };
-// cardImgAdded(movieData);
