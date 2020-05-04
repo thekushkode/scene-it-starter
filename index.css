@@ -1,5 +1,5 @@
 body {
-	background-color: #B2E9FD;
+	background-color: rgb(0, 0, 0);
 }
 
 .header h2 {
@@ -12,10 +12,38 @@ body {
 }
 
 .header p {
-	color: #50524F;
+	color: #DC4247;
 }
 
 .results {
 	margin-top: 20px;
 }
+
+/* .tooltip {
+	position: relative;
+	display: inline-block;
+	border: 1px solid red;
+}
+
+.tooltiptext {
+	visibility: hidden;
+	width: 400px;
+	background-color: black;
+	color: #fff;
+	text-align: center;
+	padding: 5px 2px;
+	border-radius: 10px;
+	position: absolute;
+	z-index: 1;
+	top: -5px;
+	left: 105%;
+
+}
+
+.tooltiptext:hover {
+	visibility: visible;
+} */
+
+
+
 

@@ -9,6 +9,9 @@ const renderMovies = function (movieArray) {
                         <div class="card-body">
                             <h5 class="card-title">${currentMovie.Title}</h5>
                             <p class="card-text">Year Released: ${currentMovie.Year}</p>
+                            <p class="card-text">IMDB Rating: ${currentMovie.imdbRating}</p>
+                            <button class="btn btn-secondary" data-toggle="tooltip" data-html="true" title="${currentMovie.Plot}">Plot
+                            </button>
                             <button  class="btn btn-primary" onclick="saveToWatchlist('${currentMovie.imdbID}')">Add Movie</button>
                         </div>
                     </div>
@@ -18,9 +21,9 @@ const renderMovies = function (movieArray) {
 };
 
 function saveToWatchlist(imdbID) {
-    axios.get(`http://www.omdbapi.com/?apikey=b43843a0&i=${imdbID}`)
+    axios.get(`http://www.omdbapi.com/?apikey=9cb3c2d3&i=${imdbID}`)
         .then(response => {
-            console.log(response.data.imdbID);
+            console.log(response.data);
             let movie = response.data;
             let watchlistJSON = localStorage.getItem("watchlist");
             let watchlist = JSON.parse(watchlistJSON);
@@ -38,7 +41,7 @@ window.addEventListener("DOMContentLoaded", function () {
         e.preventDefault();
         const $searchString = $(".search-bar").val();
         let urlEncodedSearchString = encodeURIComponent($searchString)
-        axios.get("http://www.omdbapi.com/?apikey=b43843a0&s=" + urlEncodedSearchString)
+        axios.get("http://www.omdbapi.com/?apikey=9cb3c2d3&s=" + urlEncodedSearchString)
             .then(function (response) {
                 moviesContainer.innerHTML = renderMovies(response.data.Search);
             })
